@@ -55,16 +55,16 @@
               <div class="form-floating">
                 <select
                   class="form-select"
-                  id="floatingSelectGrid"
+                  id="bed_type"
                   aria-label="Floating label select example"
                 >
                   <option selected>-</option>
-                  <option value="1">Trio</option>
-                  <option value="2">Pavel</option>
-                  <option value="3">Sany</option>
-                  <option value="3">Lion</option>
-                  <option value="3">Brusel</option>
-                  <option value="3">Monaco</option>
+                  <option value="Trio">Trio</option>
+                  <option value="Pavel">Pavel</option>
+                  <option value="Sany">Sany</option>
+                  <option value="Lion">Lion</option>
+                  <option value="Brusel">Brusel</option>
+                  <option value="Monaco">Monaco</option>
                 </select>
                 <label for="floatingSelectGrid">Výběr postele</label>
               </div>
@@ -74,7 +74,7 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="floatingInputGrid"
+                  id="width"
                 />
                 <label for="floatingInputGrid">Šířka (mm)</label>
               </div>
@@ -84,7 +84,7 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="floatingInputGrid"
+                  id="length"
                 />
                 <label for="floatingInputGrid">Délka (mm)</label>
               </div>
@@ -177,15 +177,26 @@
       </button>
       <div></div>
       <div class="d-grid justify-content-md-end">
-        <button class="btn btn-danger" type="button">Vypočítat nářezy</button>
+        <button id="count_all_beds" class="btn btn-danger" type="button">Vypočítat nářezy</button>
       </div>
     </div>
   </body>
 
   <script>
-    document.getElementById('btn_plus').addEventListener('click', onClick());
+  
+    document.getElementById('count_all_beds').addEventListener('click', onClick);
+    
+    
     function onClick() {
-      
+    
+    var bed_type = document.getElementById('bed_type').value;
+    var width = document.getElementById('width').value;
+    var length = document.getElementById('length').value; 
+    
+    google.script.run.userClicked(bed_type,width, length); 
+    document.getElementById('bed_type').value="";
+    document.getElementById('width').value="";
+    document.getElementById('length').value="";
     }
 
     let click = Number(document.getElementById('counter').innerHTML);
